@@ -15,11 +15,11 @@ class Stats::Season
   MATCH_LOSER_SQL = 'CASE WHEN "victor_id" = "home_player_id" THEN "away_player_id" ELSE "home_player_id" END'.freeze
 
   def matches_won_by_player
-    @matches_won_by_player ||= default_zero matches.group(MATCH_WINNER_SQL).count
+    @matches_won_by_player ||= default_zero matches.group(Match::WINNER_SQL).count
   end
 
   def matches_lost_by_player
-    @matches_lost_by_player ||= default_zero matches.group(MATCH_LOSER_SQL).count
+    @matches_lost_by_player ||= default_zero matches.group(Match::LOSER_SQL).count
   end
 
   POINT_FOR_SQL = '"points"."victor_id"'.freeze
