@@ -1,5 +1,5 @@
 class Match < ActiveRecord::Base
-  WINNER_SQL = %{ "matches"."victor_id" }
+  WINNER_SQL = %{ "matches"."victor_id" }.freeze
   LOSER_SQL = <<-SQL.freeze
     CASE
     WHEN "matches"."victor_id" = "home_player_id" THEN "away_player_id"

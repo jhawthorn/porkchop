@@ -27,7 +27,7 @@ class HomeController < ApplicationController
       where("created_at > ?", 30.days.ago).
       order(:created_at).
       pluck(:player_id, :created_at, :rating).
-      group_by { |player_id, created_at, rating| [player_id, created_at.to_date] }.
+      group_by { |player_id, created_at, _rating| [player_id, created_at.to_date] }.
       map { |(player_id, date), ratings| [[player_id, date], ratings.last[2]] }.
       to_h
 
