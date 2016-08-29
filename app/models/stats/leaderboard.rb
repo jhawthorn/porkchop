@@ -12,10 +12,10 @@ module Stats
       :streak_length
     )
 
-    LAST_10_SQL = <<-SQL
+    LAST_10_SQL = <<-SQL.freeze
       (SELECT victor_id FROM "matches" WHERE ("players"."id" IN (home_player_id, away_player_id)) AND finalized_at IS NOT NULL ORDER BY finalized_at DESC LIMIT 10) AS last_10
     SQL
-    STREAK_SQL = <<-SQL
+    STREAK_SQL = <<-SQL.freeze
       "streaks" WHERE player_id = "players"."id" AND "streaks"."finished_at" IS NULL
     SQL
 
@@ -34,7 +34,7 @@ module Stats
       SQL
       players.map.with_index do |player, i|
         Row.new(
-          i+1,
+          i + 1,
           player,
           player[:elo] || Player::BASE_ELO,
           (player[:elo_day_ago] || Player::BASE_ELO) - player[:elo],
